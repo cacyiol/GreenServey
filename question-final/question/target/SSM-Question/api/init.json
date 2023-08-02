@@ -1,0 +1,40 @@
+{
+  "homeInfo": {
+    "title": "Home",
+    "href": "/home/welcome"
+  },
+  "logoInfo": {
+    "title": "GreenSurvey",
+    "image": "/images/logo.jpg",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "Home",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+
+        {
+          "title": "SurveyManagement",
+          "href": "/api/sysQuestion/index",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        },
+        {
+          "title": "PaperDesign",
+          "href": "/api/sysPaper/index",
+          "icon": "fa fa-file-text",
+          "target": "_self"
+        },
+        {
+          "title": "AnalysisManagement",
+          "href": "/api/sysQuestion/countList",
+          "icon": "fa fa-file-text",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}

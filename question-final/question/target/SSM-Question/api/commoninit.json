@@ -1,0 +1,33 @@
+{
+  "homeInfo": {
+    "title": "Home",
+    "href": "/home/commonwelcome"
+  },
+  "logoInfo": {
+    "title": "GreenSurvey",
+    "image": "/images/logo.jpg",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "Home",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "PaperList",
+          "href": "/api/sysQuestion/commonlist",
+          "icon": "fa fa-window-maximize",
+          "target": "_self"
+        },
+        {
+          "title": "MyPaper",
+          "href": "/api/sysQuestion/myListUI",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}

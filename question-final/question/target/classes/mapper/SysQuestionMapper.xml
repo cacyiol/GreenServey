@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itmk.web.sys_question.mapper.SysQuestionMapper">
+    <!--    解决数据库字段和实体类字段不一样的问题-->
+    <resultMap id="sysQuestionMap" type="com.itmk.web.sys_question.entity.SysQuestion">
+        <id property="questionId" column="question_id"></id>
+        <result property="questionTitle" column="question_title"></result>
+        <result property="questionDesc" column="question_desc"></result>
+
+        <result property="questionOrder" column="question_order"></result>
+
+        <result property="da" column="da"></result>
+    </resultMap>
+    <insert id="addQuestion" parameterType="com.itmk.web.sys_question.entity.SysQuestion">
+        insert  into sys_question(question_title,question_desc,question_order,da)
+        values(#{sysQuestion.questionTitle},#{sysQuestion.questionDesc},#{sysQuestion.questionOrder},#{sysQuestion.da})
+    </insert>
+    <!--    表格查询-->
+    <select id="getTableList" resultMap="sysQuestionMap">
+        select * from sys_question
+        where 1=1
+        <if test="questionTitle != null and questionTitle !=''">
+            and question_title like concat('%',#{questionTitle},'%')
+        </if>
+    </select>
+    <select id="getById" resultMap="sysQuestionMap">
+        select * from sys_question
+        where question_id =#{questionId}
+    </select>
+    <delete id="deleteQuestion">
+        delete from sys_question
+        where question_id =#{questionId}
+    </delete>
+    <update id="editQuestion">
+        update  sys_question
+        <set>
+            <if test="sysQuestion.questionTitle != null and sysQuestion.questionTitle !=''">
+                question_title=#{sysQuestion.questionTitle},
+            </if>
+             <if test="sysQuestion.questionDesc != null and sysQuestion.questionDesc !=''">
+                question_desc=#{sysQuestion.questionDesc},
+            </if>
+
+             <if test="sysQuestion.questionOrder != null and sysQuestion.questionOrder !=''">
+                question_order=#{sysQuestion.questionOrder},
+            </if>
+
+            <if test="sysQuestion.da != null and sysQuestion.da !=''">
+                da=#{sysQuestion.da}
+            </if>
+        </set>
+        where question_id =#{sysQuestion.questionId}
+    </update>
+
+     <!--    我的问卷表格查询-->
+    <select id="getMyList" resultMap="sysQuestionMap">
+        select sq.* from sys_question as sq,answer_question as aq
+        where sq.question_id = aq.question_id
+        <if test="questionTitle != null and questionTitle !=''">
+            and sq.question_title like concat('%',#{questionTitle},'%')
+        </if>
+        and aq.user_id = #{userId}
+    </select>
+</mapper>
